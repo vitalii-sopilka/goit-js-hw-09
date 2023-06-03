@@ -6,17 +6,17 @@ const player = new Player(iframe);
 const KEY_LOCALSTORAGE_TIME = "videoplayer-current-time";
 
 player.on('timeupdate',
-    throttle(ontimeUpdateValue, 1000));
+  throttle(ontimeUpdateValue, 1000));
 
 function ontimeUpdateValue(data) {
-    localStorage.setItem(KEY_LOCALSTORAGE_TIME, data.seconds)
+  localStorage.setItem(KEY_LOCALSTORAGE_TIME, data.seconds)
 };
 
 function currentTime() {
-    const timeUpdate = localStorage.getItem(KEY_LOCALSTORAGE_TIME);
-    if (timeUpdate) {
-        player.setCurrentTime(timeUpdate);
-    }
+  const timeUpdate = localStorage.getItem(KEY_LOCALSTORAGE_TIME);
+  if (timeUpdate) {
+    player.setCurrentTime(timeUpdate);
+  }
 };
 
 currentTime();
