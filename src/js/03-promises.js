@@ -16,7 +16,7 @@ function startCreatePromises(e) {
   );
   
   function getNumbers(delay, step, amount) {
-  for (let position = 1; position <= amount; position += 1) {
+    for (let position = 1; position <= amount; position += 1) {
     createPromise(position, delay)
       .then(({ position, delay }) => {
         Notiflix.Notify.success(
@@ -34,21 +34,21 @@ function startCreatePromises(e) {
           },
         );
       })
-    delay += step;
+      delay += step;
+    }
   }
-}
 }
 
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => { 
-  const shouldResolve = Math.random() > 0.3;
-  setTimeout(() => {
-    if (shouldResolve) {
-      resolve({ position, delay });
-    }
-    else {
-      reject({ position, delay });
-    }
-  }, delay);
-})
+    const shouldResolve = Math.random() > 0.3;
+    setTimeout(() => {
+      if (shouldResolve) {
+        resolve({ position, delay });
+      }
+      else {
+        reject({ position, delay });
+      }
+    }, delay);
+  })
 }

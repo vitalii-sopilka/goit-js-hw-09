@@ -17,13 +17,13 @@ function colorSwitcher() {
 }
 
 function onStartSwitcher() {
-    startBtn.disabled = true;
-    stopBtn.disabled = false;
-    intervalId = setInterval(colorSwitcher, COLOR_TIMER);
+  startBtn.disabled = true;
+  stopBtn.disabled = false;
+  intervalId = setInterval(colorSwitcher, COLOR_TIMER);
 }
 
 function onStopSwitcher() {
-    startBtn.disabled = false;
-    stopBtn.disabled = true;
-    clearInterval(intervalId);
+  startBtn.disabled = false;
+  stopBtn.disabled = true;
+  clearInterval(intervalId);
 }

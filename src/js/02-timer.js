@@ -49,7 +49,7 @@ function addLeadingZero(value) {
 }
 
 function updateTimer() {
-    btnStart.disabled = true;
+  btnStart.disabled = true;
 
   const deltaTime = new Date(inputTimer.value) - Date.now();
   const { days, hours, minutes, seconds } = convertMs(deltaTime);
@@ -61,11 +61,11 @@ function updateTimer() {
   if (deltaTime < 1000) {
     clearInterval(timerId);
     Notiflix.Notify.info(
-  'Account ended!',
-  {
-    timeout: 2000,
-  },
-);
+      'Account ended!',
+      {
+        timeout: 2000,
+      },
+    );
   };
 }
 
