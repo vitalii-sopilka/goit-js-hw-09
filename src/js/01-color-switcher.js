@@ -1,5 +1,5 @@
 const startBtn = document.querySelector('[data-start]');
-const stopBtn = document.querySelector('[data-stop');
+const stopBtn = document.querySelector('[data-stop]');
 const body = document.querySelector('body');
 
 startBtn.addEventListener('click', onStartSwitcher);
@@ -16,14 +16,17 @@ function colorSwitcher() {
   body.style.backgroundColor = getRandomHexColor();
 }
 
+function setButtonState(disabled) {
+  startBtn.disabled = !disabled;
+  stopBtn.disabled = disabled;
+}
+
 function onStartSwitcher() {
-  startBtn.disabled = true;
-  stopBtn.disabled = false;
+  setButtonState(true);
   intervalId = setInterval(colorSwitcher, COLOR_TIMER);
 }
 
 function onStopSwitcher() {
-  startBtn.disabled = false;
-  stopBtn.disabled = true;
+  setButtonState(false);
   clearInterval(intervalId);
 }

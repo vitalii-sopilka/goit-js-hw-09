@@ -27,8 +27,8 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-  onClose(selectedDates) {
-    if (selectedDates[0] < Date.now()) {
+  onClose([selectedDates]) {
+    if (selectedDates < Date.now()) {
       Notiflix.Notify.failure(
         "Please choose a date in the future",
         {
@@ -48,25 +48,27 @@ function addLeadingZero(value) {
   return String(value).padStart(2, 0);
 }
 
+function updateTimerDisplay(days, hours, minutes, seconds) {
+  outputDays.textContent = days;
+  outputHours.textContent = hours;
+  outputMinutes.textContent = minutes;
+  outputSeconds.textContent = seconds;
+}
+
 function updateTimer() {
   btnStart.disabled = true;
 
   const deltaTime = new Date(inputTimer.value) - Date.now();
   const { days, hours, minutes, seconds } = convertMs(deltaTime);
-  outputDays.textContent = `${days}`;
-  outputHours.textContent = `${hours}`;
-  outputMinutes.textContent = `${minutes}`;
-  outputSeconds.textContent = `${seconds}`;
+
+  updateTimerDisplay(addLeadingZero(days), addLeadingZero(hours), addLeadingZero(minutes), addLeadingZero(seconds));
 
   if (deltaTime < 1000) {
     clearInterval(timerId);
-    Notiflix.Notify.info(
-      'Account ended!',
-      {
-        timeout: 2000,
-      },
-    );
-  };
+    Notiflix.Notify.info('Account ended!', {
+      timeout: 2000,
+    });
+  }
 }
 
 function onTimerStart (){
@@ -79,10 +81,10 @@ function convertMs(ms) {
   const hour = minute * 60;
   const day = hour * 24;
 
-  const days = addLeadingZero(Math.floor(ms / day));
-  const hours = addLeadingZero(Math.floor((ms % day) / hour));
-  const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
-  const seconds = addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
+  const days = Math.floor(ms / day);
+  const hours = Math.floor((ms % day) / hour);
+  const minutes = Math.floor(((ms % day) % hour) / minute);
+  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
 }
