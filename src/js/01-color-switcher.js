@@ -17,8 +17,8 @@ function colorSwitcher() {
 }
 
 function setButtonState(disabled) {
-  startBtn.disabled = !disabled;
-  stopBtn.disabled = disabled;
+  startBtn.disabled = disabled;
+  stopBtn.disabled = !disabled;
 }
 
 function onStartSwitcher() {
